@@ -156,3 +156,8 @@ split-on-trailing-comma = false
 
 [tool.ruff.lint.mccabe]
 max-complexity = 25
+
+[dependency-groups]
+dev = [
+    "pre-commit>=4.5.1",
+]

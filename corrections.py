@@ -387,7 +387,7 @@ class CorrectionManagerDialog(wx.Dialog):
                     str(regex),
                     str(rotation),
                     self.str_from_float(offset[0]),
-                    self.str_from_float(offset[1])
+                    self.str_from_float(offset[1]),
                 ]
             )
         selected_row = None
@@ -449,16 +449,24 @@ class CorrectionManagerDialog(wx.Dialog):
                     self.selection_regex = regex
                 else:
                     # The regex exists with different values, ask the user what to do.
-                    existing_correction = "(" + \
-                        str(existing_rotation) + "°, " + \
-                        self.str_from_float(existing_offset_x) + "/" + \
-                        self.str_from_float(existing_offset_y) + \
-                        ")"
-                    new_correction = "(" + \
-                        str(rotation) + "°, " + \
-                        self.str_from_float(offset_x) + "/" + \
-                        self.str_from_float(offset_y) + \
-                        ")"
+                    existing_correction = (
+                        "("
+                        + str(existing_rotation)
+                        + "°, "
+                        + self.str_from_float(existing_offset_x)
+                        + "/"
+                        + self.str_from_float(existing_offset_y)
+                        + ")"
+                    )
+                    new_correction = (
+                        "("
+                        + str(rotation)
+                        + "°, "
+                        + self.str_from_float(offset_x)
+                        + "/"
+                        + self.str_from_float(offset_y)
+                        + ")"
+                    )
 
                     dialog = wx.MessageDialog(
                         self,
@@ -468,25 +476,33 @@ class CorrectionManagerDialog(wx.Dialog):
                     )
                     if self.selection_regex is None:
                         # The user entered a regex that already exists with different values.
-                        dialog.ExtendedMessage = "Do you want to update the corrections " + \
-                           existing_correction + \
-                           " to " + \
-                           new_correction
+                        dialog.ExtendedMessage = (
+                            "Do you want to update the corrections "
+                            + existing_correction
+                            + " to "
+                            + new_correction
+                        )
                     else:
                         # The user has selected regex_a, changed it to regex_b
                         # (but regex_b exists).
-                        dialog.ExtendedMessage = "Do you want to replace the corrections " + \
-                           existing_correction + \
-                           " with " + \
-                           new_correction + \
-                           ",\n" + \
-                           f"removing the rule for '{self.selection_regex}'?"
+                        dialog.ExtendedMessage = (
+                            "Do you want to replace the corrections "
+                            + existing_correction
+                            + " with "
+                            + new_correction
+                            + ",\n"
+                            + f"removing the rule for '{self.selection_regex}'?"
+                        )
                     result = dialog.ShowModal()
 
                     if result == wx.ID_YES:
                         if self.selection_regex is not None:
-                            self.parent.library.delete_correction_data(self.selection_regex)
-                        self.parent.library.update_correction_data(regex, rotation, offset)
+                            self.parent.library.delete_correction_data(
+                                self.selection_regex
+                            )
+                        self.parent.library.update_correction_data(
+                            regex, rotation, offset
+                        )
                         self.selection_regex = regex
 
         self.rotation.SetValue(str(rotation))

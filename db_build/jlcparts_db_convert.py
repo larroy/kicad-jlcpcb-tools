@@ -80,6 +80,7 @@ class DatabaseConfig:
             where_clause="FALSE",
         )
 
+
 def update_components_db_from_api() -> None:
     """Update the component cache database."""
     db = ComponentsDatabase("db_working/cache.sqlite3")
@@ -273,7 +274,8 @@ def main(
             sentinel_filename="cache_chunk_num.txt",
         )
         fm.compress_and_split(
-            output_dir=Path(archive_dir), delete_original=skip_cleanup)
+            output_dir=Path(archive_dir), delete_original=skip_cleanup
+        )
 
 
 if __name__ == "__main__":

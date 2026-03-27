@@ -215,7 +215,7 @@ The <i><b>{working directory}</b></i> should be your plugins directory, ie:
 |Linux   | ~/.local/share/kicad/<version>/scripting/plugins/          |
 |Windows | %USERPROFILE%\Documents\KiCad\<version>\scripting\plugins\ |
 
-> [!NOTE]  
+> [!NOTE]
 > <version> can be 7.0, 8.0, or X.YY depending on the version you use
 
 #### Plugin folder name

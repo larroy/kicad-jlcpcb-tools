@@ -26,7 +26,7 @@ jobs:
         uses: chartboost/ruff-action@v1
         with:
           version: 0.11.4
-          args: check 
+          args: check
           src: "."
   deadcode:
     runs-on: ubuntu-latest

@@ -22,6 +22,8 @@ from .events import (
 from .helpers import PLUGIN_PATH, dict_factory, natural_sort_collation
 from .unzip_parts import unzip_parts
 
+PART_QUERY_LIMIT = 200
+
 
 class PartsDatabaseInfo(NamedTuple):
     """Information about the parts database."""
@@ -289,7 +291,7 @@ class Library:
             query += " AND ".join(query_chunks)
 
         query += f' ORDER BY "{self.order_by}" COLLATE naturalsort {self.order_dir}'
-        query += " LIMIT 1000"
+        query += f" LIMIT {PART_QUERY_LIMIT}"
 
         self.logger.debug("query '%s'", query)
 

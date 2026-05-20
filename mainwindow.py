@@ -621,12 +621,13 @@ class JLCPCBTools(wx.Dialog):
             self.store.set_lcsc(reference, e.lcsc)
             self.store.set_stock(reference, int(e.stock))
             board = self.pcbnew.GetBoard()
-            fp = board.FindFootprintByReference(reference)
-            set_lcsc_value(fp, e.lcsc)
-            params = params_for_part(self.library.get_part_details(e.lcsc))
-            self.partlist_data_model.set_lcsc(
-                reference, e.lcsc, e.type, e.stock, params
-            )
+            fp: kicad_pcbnew.FOOTPRINT = board.FindFootprintByReference(reference)
+            if fp:
+                set_lcsc_value(fp, e.lcsc)
+                params = params_for_part(self.library.get_part_details(e.lcsc))
+                self.partlist_data_model.set_lcsc(
+                    reference, e.lcsc, e.type, e.stock, params
+                )
 
     def display_message(self, e: wx.PyEvent) -> None:
         """Dispaly a message with the data from the event."""

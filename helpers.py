@@ -128,6 +128,7 @@ def set_lcsc_value(fp, lcsc: str):
 
     if lcsc_field:
         fp.SetField(lcsc_field.GetName(), lcsc)
+        lcsc_field.SetVisible(False)
     else:
         fp.SetField("LCSC", lcsc)
         if hasattr(fp, "GetFieldByName"):
